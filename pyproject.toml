@@ -1,0 +1,8 @@
+[project]
+name = "contract-guardian-agent"
+version = "0.1.0"
+description = "A multi-agent contract review and payment risk warning demo."
+requires-python = ">=3.10"
+
+[tool.unittest]
+testpaths = ["tests"]
