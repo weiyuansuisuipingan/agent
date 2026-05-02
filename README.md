@@ -97,6 +97,8 @@ python -m unittest discover -s tests -v
 
 项目包含一个静态演示站，用于展示风险评分、关键条款、复合风险链路和多 Agent 流程。
 
+![Contract Guardian Agent demo dashboard](docs/assets/demo-dashboard.JPG)
+
 启动本地演示页：
 
 ```bash
