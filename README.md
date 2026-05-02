@@ -1,28 +1,41 @@
 # Contract Guardian Agent
 
-`Contract Guardian Agent` 是一个面向企业销售、法务、财务协同场景的合同审查与回款风险预警项目。它不是示例里的代码重构方向，而是聚焦更贴近业务结果的合同风控场景：帮助团队更快识别付款周期过长、验收条件模糊、无限责任、知识产权归属异常、数据跨境等高风险条款，并自动生成审查报告。
+Contract Guardian Agent 是一个面向企业销售、法务、财务协同场景的合同审查与回款风险预警项目。它通过多 Agent 流程完成合同条款抽取、规则比对、复合风险推理和审查报告生成，帮助团队更快识别高风险合同并给出处理建议。
 
-## 项目价值
+## Repository About
 
-- 解决人工审查慢、标准不一致、经验难复用的问题
-- 用多 Agent 流程把合同内容拆解、比对、推理、汇总
-- 支持将“条款级风险”进一步组合成“现金流链路风险”和“合规链路风险”
-- 生成可直接向业务方解释的审查结论和修改建议
+GitHub `About` 可直接使用下面这句：
 
-## 多 Agent 设计
+`Multi-agent contract review and payment risk warning demo for sales, legal, and finance workflows.`
+
+建议 Topics：
+
+`multi-agent`, `contract-review`, `risk-analysis`, `python`, `legaltech`, `workflow-automation`
+
+更多仓库介绍文案见 [repository_about.md](F:\codex\agent\docs\repository_about.md)。
+
+## 核心价值
+
+- 降低人工逐条审查的时间成本
+- 提升合同审查标准的一致性
+- 识别长账期、长验收、无限责任、IP 归属异常、数据跨境等关键风险
+- 将单点条款风险组合成现金流、合规、责任等复合风险判断
+- 自动生成 Markdown 报告和 JSON 摘要，便于接入审批流或知识库
+
+## 多 Agent 流程
 
 1. `DocumentParserAgent`
    - 解析合同文本
-   - 抽取付款周期、验收周期、自动续约、责任边界、IP 归属等结构化特征
+   - 抽取付款周期、验收周期、自动续约、责任边界、IP 归属等结构化字段
 2. `ClauseComparisonAgent`
-   - 将抽取结果与标准规则库进行逐项比对
+   - 按标准规则库逐项比对条款
    - 输出单点风险发现
 3. `RiskReasoningAgent`
-   - 对多个风险点进行长链路组合推理
-   - 识别回款、合规、资产归属等复合风险
+   - 组合多个风险信号做长链路推理
+   - 识别回款、合规、责任失衡等复合风险
 4. `ReportAgent`
-   - 自动生成 Markdown 审查报告和 JSON 摘要
-   - 给出处理建议和是否需要人工复核
+   - 生成可读报告和结构化摘要
+   - 给出是否建议人工复核
 
 ## 项目结构
 
@@ -37,9 +50,15 @@
 |-- data/contracts/
 |   |-- high_risk_saas_contract.txt
 |   `-- low_risk_saas_contract.txt
+|-- demo/
+|   |-- app.js
+|   |-- index.html
+|   |-- styles.css
+|   `-- data/reviews.json
 |-- docs/
-|   |-- solution_summary.md
-|   `-- project_overview.md
+|   |-- project_overview.md
+|   |-- repository_about.md
+|   `-- solution_summary.md
 |-- tests/
 |   `-- test_pipeline.py
 |-- main.py
@@ -62,7 +81,7 @@ python main.py review --input data/contracts/high_risk_saas_contract.txt
 python main.py review --input data/contracts/low_risk_saas_contract.txt
 ```
 
-运行内置演示：
+运行内置演示数据：
 
 ```bash
 python main.py demo
@@ -74,6 +93,20 @@ python main.py demo
 python -m unittest discover -s tests -v
 ```
 
+## 前端演示页
+
+项目包含一个静态演示站，用于展示风险评分、关键条款、复合风险链路和多 Agent 流程。
+
+启动本地演示页：
+
+```bash
+python main.py serve-demo --port 4173
+```
+
+然后打开：
+
+`http://127.0.0.1:4173`
+
 ## 输出结果
 
 程序会自动在 `outputs/` 目录中生成：
@@ -81,4 +114,8 @@ python -m unittest discover -s tests -v
 - `*_report.md`：可读性更强的审查报告
 - `*_summary.json`：结构化风险摘要
 
-补充说明见 [solution_summary.md](F:\codex\agent\docs\solution_summary.md) 和 [project_overview.md](F:\codex\agent\docs\project_overview.md)。
+## 说明文档
+
+- 项目摘要：[solution_summary.md](F:\codex\agent\docs\solution_summary.md)
+- 项目总览：[project_overview.md](F:\codex\agent\docs\project_overview.md)
+- 仓库 About 文案：[repository_about.md](F:\codex\agent\docs\repository_about.md)

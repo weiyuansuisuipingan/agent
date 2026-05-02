@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contract Guardian Agent Demo</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Contract Intelligence Dashboard</p>
+          <h1>Contract Guardian Agent</h1>
+          <p class="hero-text">
+            面向销售、法务、财务协同场景的合同审查与回款风险预警系统。
+            它将条款抽取、规则比对、复合风险推理和报告生成串联为一个可落地的多 Agent 流程。
+          </p>
+          <div class="hero-actions">
+            <button class="ghost-button active" data-contract="high_risk_saas_contract">
+              高风险样例
+            </button>
+            <button class="ghost-button" data-contract="low_risk_saas_contract">
+              低风险样例
+            </button>
+          </div>
+        </div>
+        <div class="hero-panel">
+          <div class="risk-ring" id="risk-ring">
+            <span id="risk-score">100</span>
+            <small>Risk Score</small>
+          </div>
+          <div class="hero-meta">
+            <div>
+              <span class="meta-label">Risk Level</span>
+              <strong id="risk-level">critical</strong>
+            </div>
+            <div>
+              <span class="meta-label">Human Review</span>
+              <strong id="risk-review">Required</strong>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main class="dashboard">
+        <section class="card overview-card">
+          <div class="section-head">
+            <div>
+              <p class="section-kicker">Overview</p>
+              <h2 id="contract-title">企业级 SaaS 平台服务合同</h2>
+            </div>
+            <span class="badge" id="status-badge">高优先级处理</span>
+          </div>
+          <p class="section-text" id="contract-summary"></p>
+          <div class="metrics-grid" id="metrics-grid"></div>
+        </section>
+
+        <section class="card">
+          <div class="section-head">
+            <div>
+              <p class="section-kicker">Agent Flow</p>
+              <h2>多 Agent 审查链路</h2>
+            </div>
+          </div>
+          <div class="timeline" id="timeline"></div>
+        </section>
+
+        <section class="card">
+          <div class="section-head">
+            <div>
+              <p class="section-kicker">Findings</p>
+              <h2>关键风险发现</h2>
+            </div>
+            <span class="counter" id="findings-count">0 findings</span>
+          </div>
+          <div class="findings-list" id="findings-list"></div>
+        </section>
+
+        <section class="two-column">
+          <article class="card">
+            <div class="section-head">
+              <div>
+                <p class="section-kicker">Chain Risks</p>
+                <h2>复合风险链</h2>
+              </div>
+            </div>
+            <div class="chain-list" id="chain-list"></div>
+          </article>
+
+          <article class="card">
+            <div class="section-head">
+              <div>
+                <p class="section-kicker">Output</p>
+                <h2>系统输出</h2>
+              </div>
+            </div>
+            <ul class="artifact-list">
+              <li>结构化条款抽取结果</li>
+              <li>风险评分与等级判断</li>
+              <li>人工复核建议</li>
+              <li>Markdown 审查报告</li>
+              <li>JSON 风险摘要</li>
+            </ul>
+          </article>
+        </section>
+      </main>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>

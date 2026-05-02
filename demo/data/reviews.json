@@ -1,0 +1,82 @@
+{
+  "high_risk_saas_contract": {
+    "features": {
+      "contract_title": "企业级 SaaS 平台服务合同",
+      "payment_days": 90,
+      "acceptance_days": 45,
+      "auto_renewal": true,
+      "termination_notice_days": 60,
+      "unlimited_liability": true,
+      "ip_assigned_to_customer": true,
+      "cross_border_data_transfer": true
+    },
+    "findings": [
+      {
+        "title": "付款周期过长",
+        "severity": "high",
+        "reason": "当前付款周期为 90 日，超过建议阈值 45 日。",
+        "recommendation": "建议改为里程碑付款或将回款周期压缩至 30-45 日。"
+      },
+      {
+        "title": "验收周期偏长",
+        "severity": "medium",
+        "reason": "验收周期为 45 日，容易推迟开票与收款。",
+        "recommendation": "建议限定验收时点，并增加逾期视为默认验收条款。"
+      },
+      {
+        "title": "存在自动续约条款",
+        "severity": "medium",
+        "reason": "自动续约可能在业务未及时跟进时形成持续义务。",
+        "recommendation": "建议增加明确的续约确认机制或缩短通知周期。"
+      },
+      {
+        "title": "赔偿责任未封顶",
+        "severity": "critical",
+        "reason": "合同存在无限责任或未设置赔偿上限，容易造成不可控损失。",
+        "recommendation": "建议将赔偿责任上限限定为合同金额或最近 12 个月已支付服务费。"
+      },
+      {
+        "title": "知识产权归属异常",
+        "severity": "high",
+        "reason": "合同将成果或著作权整体归属客户，可能损害平台复用与二次商业化能力。",
+        "recommendation": "建议区分预有知识产权、通用能力和项目定制交付物。"
+      },
+      {
+        "title": "存在数据跨境风险",
+        "severity": "high",
+        "reason": "合同涉及境外传输或境外存储，可能触发额外的数据合规义务。",
+        "recommendation": "建议补充脱敏、最小化、数据地域和合规审批要求。"
+      }
+    ],
+    "assessment": {
+      "risk_score": 100,
+      "risk_level": "critical",
+      "chain_risks": [
+        "现金流链路风险：长账期与长验收周期叠加，会同时推迟确认收入、开票和回款。",
+        "资产与赔偿双重风险：在知识产权让渡的同时承担无限责任，项目收益与风险严重失衡。",
+        "合规复合风险：数据跨境与成果归属客户同时存在，容易引发额外合规和审计压力。",
+        "续约锁定风险：自动续约配合较长终止通知期，可能导致团队错过退出窗口。"
+      ],
+      "requires_human_review": true
+    }
+  },
+  "low_risk_saas_contract": {
+    "features": {
+      "contract_title": "标准 SaaS 订阅服务合同",
+      "payment_days": 30,
+      "acceptance_days": 10,
+      "auto_renewal": false,
+      "termination_notice_days": 15,
+      "unlimited_liability": false,
+      "ip_assigned_to_customer": false,
+      "cross_border_data_transfer": false
+    },
+    "findings": [],
+    "assessment": {
+      "risk_score": 0,
+      "risk_level": "low",
+      "chain_risks": [],
+      "requires_human_review": false
+    }
+  }
+}

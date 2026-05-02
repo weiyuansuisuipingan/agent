@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 import argparse
+from http.server import SimpleHTTPRequestHandler
 from pathlib import Path
+from socketserver import TCPServer
 
 from contract_guardian.pipeline import ContractRiskPipeline
 
@@ -25,6 +27,19 @@ def build_parser() -> argparse.ArgumentParser:
         "--output-dir",
         default="outputs",
         help="Directory for generated reports.",
+    )
+
+    serve_parser = subparsers.add_parser("serve-demo", help="Serve the frontend demo locally.")
+    serve_parser.add_argument(
+        "--host",
+        default="127.0.0.1",
+        help="Host for the local demo server.",
+    )
+    serve_parser.add_argument(
+        "--port",
+        type=int,
+        default=4173,
+        help="Port for the local demo server.",
     )
     return parser
 
@@ -50,6 +65,20 @@ def run_demo(output_dir: str) -> None:
         print("-" * 60)
 
 
+def run_demo_server(host: str, port: int) -> None:
+    demo_dir = Path(__file__).parent / "demo"
+    handler = lambda *args, **kwargs: SimpleHTTPRequestHandler(
+        *args,
+        directory=str(demo_dir),
+        **kwargs,
+    )
+
+    with TCPServer((host, port), handler) as httpd:
+        print(f"Serving demo at http://{host}:{port}")
+        print("Press Ctrl+C to stop.")
+        httpd.serve_forever()
+
+
 def main() -> None:
     parser = build_parser()
     args = parser.parse_args()
@@ -58,6 +87,8 @@ def main() -> None:
         run_review(args.input, args.output_dir)
     elif args.command == "demo":
         run_demo(args.output_dir)
+    elif args.command == "serve-demo":
+        run_demo_server(args.host, args.port)
 
 
 if __name__ == "__main__":
