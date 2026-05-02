@@ -38,7 +38,7 @@
 |   |-- high_risk_saas_contract.txt
 |   `-- low_risk_saas_contract.txt
 |-- docs/
-|   |-- application_answer.md
+|   |-- solution_summary.md
 |   `-- project_overview.md
 |-- tests/
 |   `-- test_pipeline.py
@@ -81,13 +81,4 @@ python -m unittest discover -s tests -v
 - `*_report.md`：可读性更强的审查报告
 - `*_summary.json`：结构化风险摘要
 
-## 适合如何讲给评审
-
-你可以把这个项目包装成一个“企业合同审查与回款风控 Agent”，重点强调：
-
-- 核心痛点：合同审查依赖人工，效率低，容易漏掉组合风险
-- Agent 逻辑：不是单轮问答，而是多阶段、多角色协同
-- 长链路推理：从条款识别升级到业务后果判断
-- 业务价值：缩短审查时间，提升签约效率和回款安全
-
-更完整的申报文案见 [docs/application_answer.md](F:\codex\agent\docs\application_answer.md)。
+补充说明见 [solution_summary.md](F:\codex\agent\docs\solution_summary.md) 和 [project_overview.md](F:\codex\agent\docs\project_overview.md)。
